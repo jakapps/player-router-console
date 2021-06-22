@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const EnterServerURL: FC = () => {
+const Login: FC = () => {
     return (
         <>
             <input aria-label="input" />
@@ -8,4 +8,4 @@ const EnterServerURL: FC = () => {
     );
 };
 
-export default EnterServerURL;
+export default Login;

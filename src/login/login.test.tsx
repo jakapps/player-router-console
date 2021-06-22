@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import EnterServerURL from './enter-server-url';
+import Login from './login';
 
-describe('EnterServerURL', () => {
+describe('Login', () => {
 
     test('renders input box', () => {
-        render(<EnterServerURL />);
+        render(<Login />);
         const inputElement = screen.getByLabelText('input');
         expect(inputElement).toBeInTheDocument();
     });

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import './App.css';
 
-import { EnterServerURL } from "./enter-server-url";
+import { Login } from "./login";
 
 const App: FC = () => {
     return (
         <div className="App">
-            <EnterServerURL />
+            <Login />
         </div>
     );
 };
