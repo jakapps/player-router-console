@@ -42,13 +42,14 @@ const Button: FC<ButtonProps> = ({ click, children }) => {
 };
 
 interface LoginProps {
+    errorUrl?: string,
     onSubmit: (args: { url: string, username?: string, password?: string}) => void
 };
 
-const Login: FC<LoginProps> = ({ onSubmit }) => {
+const Login: FC<LoginProps> = ({ onSubmit, errorUrl }) => {
 
     const [url, setUrl] = useState('');
-    const [urlError, setUrlError] = useState('');
+    const [urlError, setUrlError] = useState(errorUrl);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 

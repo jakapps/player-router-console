@@ -4,10 +4,12 @@ import Login from './login';
 
 describe('Login', () => {
     let onSubmit;
+    let errorUrl;
 
     beforeEach(() => {
         onSubmit = jest.fn();
-        render(<Login onSubmit={onSubmit} />);
+        errorUrl = "Server not found";
+        render(<Login onSubmit={onSubmit} errorUrl={errorUrl} />);
     });
 
     test('renders url input box', () => {
@@ -99,7 +101,8 @@ describe('Login', () => {
     describe('when server not found error is added to props', () => {
 
         test('error message appears, informing user that the server cannot be found', () => {
-
+            let error = screen.getByText("Server not found");
+            expect(error).toBeInTheDocument();
         });
     });
 
