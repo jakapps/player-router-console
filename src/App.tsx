@@ -12,7 +12,7 @@ const App: FC = () => {
 
                 <div className="flex">
                     <div className="flex-grow"></div>
-                    <Login />
+                    <Login onSubmit={() => console.log('submit')} />
                     <div className="flex-grow"></div>
                 </div>
 

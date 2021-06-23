@@ -1,17 +1,19 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 interface InputFieldProps {
     name: string,
     title: string,
     placeholder?: string
+    onChange: (value: string) => void
 };
 
-const InputField: FC<InputFieldProps> = ({ name, title, placeholder }) => {
+const InputField: FC<InputFieldProps> = ({ name, title, placeholder, onChange }) => {
 
     return (
         <>
             <div className="pb-1">{title}</div>
             <input
+                onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
                 className="w-full p-2 rounded outline-none border-2 border-blue-500"
                 aria-label={`${name}-input`}
@@ -20,7 +22,37 @@ const InputField: FC<InputFieldProps> = ({ name, title, placeholder }) => {
     )
 };
 
-const Login: FC = () => {
+interface ButtonProps {
+    click: () => void
+};
+
+const Button: FC<ButtonProps> = ({ click, children }) => {
+
+    return (
+        <button onClick={() => click()}>{children}</button>
+    )
+};
+
+interface LoginProps {
+    onSubmit: (args: { url: string, username?: string, password?: string}) => void
+};
+
+const Login: FC<LoginProps> = ({ onSubmit }) => {
+
+    const [url, setUrl] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const submit = () => {
+        let vals: any = { url };
+
+        if(username && password) {
+            vals.username = username;
+            vals.password = password;
+        }
+
+        onSubmit(vals);
+    };
 
     return (
         <div className="bg-gray-100 p-4 border-2 border-blue-500 rounded">
@@ -29,6 +61,7 @@ const Login: FC = () => {
                     name="url"
                     title="Player Router Server"
                     placeholder="Eg wss://server.playerrouter.com"
+                    onChange={(value: string) => setUrl(value)}
                 />
             </div>
             <div className="flex w-full">
@@ -37,15 +70,18 @@ const Login: FC = () => {
                         name="username"
                         title="Username"
                         placeholder="Eg admin"
+                        onChange={(value: string) => setUsername(value)}
                     />
                 </div>
                 <div className="w-1/2 pl-2">
                     <InputField
                         name="password"
                         title="Password"
+                        onChange={(value: string) => setPassword(value)}
                     />
                 </div>
             </div>
+            <Button click={() => submit()}>Login</Button>
         </div>
     );
 };
