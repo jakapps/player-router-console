@@ -43,13 +43,17 @@ const Button: FC<ButtonProps> = ({ click, children }) => {
 
 interface LoginProps {
     errorUrl?: string,
+    errorUsername?: string,
+    errorPassword?: string,
     onSubmit: (args: { url: string, username?: string, password?: string}) => void
 };
 
-const Login: FC<LoginProps> = ({ onSubmit, errorUrl }) => {
+const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPassword }) => {
 
     const [url, setUrl] = useState('');
     const [urlError, setUrlError] = useState(errorUrl);
+    const [usernameError, setUsernameError] = useState(errorUsername);
+    const [passwordError, setPasswordError] = useState(errorPassword);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -85,6 +89,7 @@ const Login: FC<LoginProps> = ({ onSubmit, errorUrl }) => {
                 <div className="w-1/2 pr-2">
                     <InputField
                         name="username"
+                        error={usernameError}
                         title="Username"
                         placeholder="Eg admin"
                         onChange={(value: string) => setUsername(value)}
@@ -93,6 +98,7 @@ const Login: FC<LoginProps> = ({ onSubmit, errorUrl }) => {
                 <div className="w-1/2 pl-2">
                     <InputField
                         name="password"
+                        error={passwordError}
                         title="Password"
                         onChange={(value: string) => setPassword(value)}
                     />

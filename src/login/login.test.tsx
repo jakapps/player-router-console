@@ -5,11 +5,21 @@ import Login from './login';
 describe('Login', () => {
     let onSubmit;
     let errorUrl;
+    let errorUsername;
+    let errorPassword;
 
     beforeEach(() => {
         onSubmit = jest.fn();
         errorUrl = "Server not found";
-        render(<Login onSubmit={onSubmit} errorUrl={errorUrl} />);
+        errorUsername = "User not found";
+        errorPassword = "Invalid Password";
+
+        render(<Login
+            onSubmit={onSubmit}
+            errorUrl={errorUrl}
+            errorUsername={errorUsername}
+            errorPassword={errorPassword}
+        />);
     });
 
     test('renders url input box', () => {
@@ -109,7 +119,11 @@ describe('Login', () => {
     describe('when failed authentication error is added to props', () => {
 
         test('error message appear, informing user that the username and/or password is not valid', () => {
+            let userNameErrorText = screen.getByText("User not found");
+            let passwordInvalidText = screen.getByText("Invalid Password");
 
+            expect(userNameErrorText).toBeInTheDocument();
+            expect(passwordInvalidText).toBeInTheDocument();
         });
     });
 });

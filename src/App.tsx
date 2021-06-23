@@ -12,7 +12,9 @@ const App: FC = () => {
 
                 <div className="flex">
                     <div className="flex-grow"></div>
-                    <Login onSubmit={() => console.log('submit')} />
+                    <Login
+                        errorUsername="User not ofund"
+                        onSubmit={() => console.log('submit')} />
                     <div className="flex-grow"></div>
                 </div>
 
