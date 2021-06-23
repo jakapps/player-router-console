@@ -53,10 +53,9 @@ const Login: FC<LoginProps> = ({ onSubmit }) => {
     const [password, setPassword] = useState('');
 
     const submit = () => {
-        setUrlError('');
 
         if(!url) {
-            setUrlError('Enter a valid url for Player Router server')
+            setUrlError('Enter a valid url for Player Router server');
             return;
         }
 
@@ -78,7 +77,7 @@ const Login: FC<LoginProps> = ({ onSubmit }) => {
                     error={urlError}
                     title="Player Router Server"
                     placeholder="Eg wss://server.playerrouter.com"
-                    onChange={(value: string) => setUrl(value)}
+                    onChange={(value: string) => {setUrl(value); setUrlError('')}}
                 />
             </div>
             <div className="flex w-full">

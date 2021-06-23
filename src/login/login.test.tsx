@@ -79,6 +79,20 @@ describe('Login', () => {
                 let error = screen.getByText("Enter a valid url for Player Router server");
                 expect(error).toBeInTheDocument();
             });
+
+            test('changing field should remove error message', () => {
+                let button = screen.getByRole('button');
+                fireEvent.click(button);
+
+                let error = screen.getByText("Enter a valid url for Player Router server");
+                expect(error).toBeInTheDocument();
+
+                let urlElement = screen.getByLabelText('url-input');
+                fireEvent.change(urlElement, { target: { value: 'example.url.com' }});
+
+                error = screen.getByText("Player Router Server");
+                expect(error).toBeInTheDocument();
+            });
         });
     });
 
