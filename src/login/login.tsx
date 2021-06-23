@@ -92,7 +92,7 @@ const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswor
                         error={usernameError}
                         title="Username"
                         placeholder="Eg admin"
-                        onChange={(value: string) => setUsername(value)}
+                        onChange={(value: string) => {setUsername(value); setUsernameError('')}}
                     />
                 </div>
                 <div className="w-1/2 pl-2">
@@ -100,7 +100,7 @@ const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswor
                         name="password"
                         error={passwordError}
                         title="Password"
-                        onChange={(value: string) => setPassword(value)}
+                        onChange={(value: string) => {setPassword(value); setPasswordError('')}}
                     />
                 </div>
             </div>

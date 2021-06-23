@@ -104,6 +104,18 @@ describe('Login', () => {
 
                 error = screen.getByText("Player Router Server");
                 expect(error).toBeInTheDocument();
+
+                let usernameElement = screen.getByLabelText('username-input');
+                fireEvent.change(usernameElement, { target: { value: 'admin' }});
+
+                let usernameText = screen.getByText("Username");
+                expect(usernameText).toBeInTheDocument();
+
+                let passwordElement = screen.getByLabelText('password-input');
+                fireEvent.change(passwordElement, { target: { value: 'password123' }});
+
+                let passwordText = screen.getByText("Password");
+                expect(passwordText).toBeInTheDocument();
             });
         });
     });
