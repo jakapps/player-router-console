@@ -3,19 +3,23 @@ import { FC, useState } from "react";
 interface InputFieldProps {
     name: string,
     title: string,
+    error?: string,
     placeholder?: string
     onChange: (value: string) => void
 };
 
-const InputField: FC<InputFieldProps> = ({ name, title, placeholder, onChange }) => {
+const InputField: FC<InputFieldProps> = ({ name, title, placeholder, onChange, error }) => {
+
+    let titleClasses = error ? 'text-red-600' : '';
+    let inputClasses = error ? 'border-red-600': 'border-blue-500';
 
     return (
         <>
-            <div className="pb-1">{title}</div>
+            <div className={`pb-1 ${titleClasses}`}>{error || title}</div>
             <input
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
-                className="w-full p-2 rounded outline-none border-2 border-blue-500"
+                className={`w-full p-2 rounded outline-none border-2 ${inputClasses}`}
                 aria-label={`${name}-input`}
             />
         </>
@@ -44,12 +48,15 @@ interface LoginProps {
 const Login: FC<LoginProps> = ({ onSubmit }) => {
 
     const [url, setUrl] = useState('');
+    const [urlError, setUrlError] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const submit = () => {
+        setUrlError('');
 
         if(!url) {
+            setUrlError('Enter a valid url for Player Router server')
             return;
         }
 
@@ -68,6 +75,7 @@ const Login: FC<LoginProps> = ({ onSubmit }) => {
             <div className="pb-4">
                 <InputField
                     name="url"
+                    error={urlError}
                     title="Player Router Server"
                     placeholder="Eg wss://server.playerrouter.com"
                     onChange={(value: string) => setUrl(value)}

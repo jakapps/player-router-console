@@ -73,7 +73,11 @@ describe('Login', () => {
             });
 
             test('error message should appear, promting user to enter a url', () => {
+                let button = screen.getByRole('button');
+                fireEvent.click(button);
 
+                let error = screen.getByText("Enter a valid url for Player Router server");
+                expect(error).toBeInTheDocument();
             });
         });
     });
