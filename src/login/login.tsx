@@ -29,7 +29,11 @@ interface ButtonProps {
 const Button: FC<ButtonProps> = ({ click, children }) => {
 
     return (
-        <button onClick={() => click()}>{children}</button>
+        <button
+            className="w-full bg-blue-600 text-blue-100 p-2 rounded"
+            onClick={() => click()}>
+            {children}
+        </button>
     )
 };
 
@@ -44,6 +48,11 @@ const Login: FC<LoginProps> = ({ onSubmit }) => {
     const [password, setPassword] = useState('');
 
     const submit = () => {
+
+        if(!url) {
+            return;
+        }
+
         let vals: any = { url };
 
         if(username && password) {
@@ -81,7 +90,9 @@ const Login: FC<LoginProps> = ({ onSubmit }) => {
                     />
                 </div>
             </div>
-            <Button click={() => submit()}>Login</Button>
+            <div className="pt-4">
+                <Button click={() => submit()}>Login</Button>
+            </div>
         </div>
     );
 };
