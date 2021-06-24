@@ -5,3 +5,56 @@
     background-size: 80px 140px;
     background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
+
+.expanding {
+    animation: enter 0.5s;
+    max-width: 100%;
+}
+
+.collapsed {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+@keyframes enter {
+  0% {
+      transform: scale(0.2, 0.2);
+  }
+
+  100% {
+      transform: scale(1, 1);
+  }
+}
+
+.fade-in {
+    animation: fade-in 0.5s;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 0.1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.spinning {
+    animation: spinning infinite 2s linear;
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
