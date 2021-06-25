@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Login from './login';
+import { Login } from './login';
 
 describe('Login', () => {
     let onSubmit;

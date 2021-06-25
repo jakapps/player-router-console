@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { ILoginSubmitData } from "../interfaces";
 
 interface InputFieldProps {
     name: string,
@@ -46,7 +47,7 @@ interface LoginProps {
     errorUrl?: string,
     errorUsername?: string,
     errorPassword?: string,
-    onSubmit: (args: { url: string, username?: string, password?: string}) => void
+    onSubmit: (args: ILoginSubmitData) => void
 };
 
 const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPassword, loading }) => {
@@ -114,4 +115,6 @@ const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswor
     );
 };
 
-export default Login;
+export {
+    Login
+};

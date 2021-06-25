@@ -3,6 +3,8 @@ import { FC, useState, useContext } from "react";
 import { Login } from "../login";
 import { UserContext } from "../contexts/user";
 
+import { ILoginSubmitData } from '../interfaces';
+
 const SplashScreen: FC = () => {
 
     const [loading, setLoading] = useState(true);
@@ -12,7 +14,23 @@ const SplashScreen: FC = () => {
         setLoading(false);
     }, 3000);
 
-    setUsername('herp')
+    const submit = ({ url, username, password }: ILoginSubmitData) => {
+
+        if(loading) {
+            return;
+        }
+
+        setLoading(true);
+
+        setTimeout(() => {
+
+            if(username) {
+                setUsername(username);
+            };
+
+            setLoading(false);
+        }, 2000);
+    }
 
     return (
         <div className="flex flex-col h-full">
@@ -21,10 +39,9 @@ const SplashScreen: FC = () => {
 
             <div className="flex">
                 <div className="flex-grow"></div>
-                {username}
                 <Login
                     loading={loading}
-                    onSubmit={(data) => console.log('submit')}
+                    onSubmit={(data) => submit(data)}
                 />
                 <div className="flex-grow"></div>
             </div>
