@@ -5,19 +5,23 @@ import './App.css';
 import { SplashScreen } from "./splash-screen";
 import { Dashboard } from "./dashboard";
 
+import { UserProvider } from "./contexts/user";
+
 const App: FC = () => {
 
     return (
         <BrowserRouter>
             <div className="app h-full">
-                <Switch>
-                    <Route path="/login">
-                        <SplashScreen />
-                    </Route>
-                    <Route path="/">
-                        <Dashboard />
-                    </Route>
-                </Switch>
+                <UserProvider>
+                    <Switch>
+                        <Route path="/login">
+                            <SplashScreen />
+                        </Route>
+                        <Route path="/">
+                            <Dashboard />
+                        </Route>
+                    </Switch>
+                </UserProvider>
             </div>
         </BrowserRouter>
     );
