@@ -76,7 +76,7 @@ const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswor
     };
 
     return (
-        <div className={`bg-gray-100 p-4 border-2 border-blue-500 rounded ${loading ? 'spinning' : 'expanding'}`}>
+        <div className={`bg-gray-100 p-4 border-2 border-blue-500 rounded shadow-xl ${loading ? 'spinning' : 'expanding'}`}>
             <div className={`${loading ? 'collapsed' : ''}`}>
                 <div className="pb-4">
                     <InputField

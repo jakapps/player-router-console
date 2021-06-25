@@ -1,35 +1,25 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css';
 
-import { Login } from "./login";
+import { SplashScreen } from "./splash-screen";
+import { Dashboard } from "./dashboard";
 
 const App: FC = () => {
 
-    const [loading, setLoading] = useState(true);
-
-    setTimeout(() => {
-        setLoading(false);
-    }, 3000);
-
     return (
-        <div className="app h-full">
-            <div className="flex flex-col h-full">
-
-                <div className="flex-grow"></div>
-
-                <div className="flex">
-                    <div className="flex-grow"></div>
-                    <Login
-                        loading={loading}
-                        onSubmit={() => console.log('submit')}
-                    />
-                    <div className="flex-grow"></div>
-                </div>
-
-                <div className="flex-grow"></div>
-
+        <BrowserRouter>
+            <div className="app h-full">
+                <Switch>
+                    <Route path="/login">
+                        <SplashScreen />
+                    </Route>
+                    <Route path="/">
+                        <Dashboard />
+                    </Route>
+                </Switch>
             </div>
-        </div>
+        </BrowserRouter>
     );
 };
 
