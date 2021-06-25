@@ -1,4 +1,5 @@
 import { FC, useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
 
 import { Login } from "../login";
 import { UserContext } from "../contexts/user";
@@ -7,12 +8,8 @@ import { ILoginSubmitData } from '../interfaces';
 
 const SplashScreen: FC = () => {
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const { username, setUsername } = useContext(UserContext);
-
-    setTimeout(() => {
-        setLoading(false);
-    }, 3000);
 
     const submit = ({ url, username, password }: ILoginSubmitData) => {
 
@@ -22,18 +19,16 @@ const SplashScreen: FC = () => {
 
         setLoading(true);
 
-        setTimeout(() => {
+        if(username) {
+            setUsername(username);
+        };
 
-            if(username) {
-                setUsername(username);
-            };
-
-            setLoading(false);
-        }, 2000);
+        setLoading(false);
     }
 
     return (
         <div className="flex flex-col h-full">
+            {username ? <Redirect to="/" />: <></>}
 
             <div className="flex-grow"></div>
 

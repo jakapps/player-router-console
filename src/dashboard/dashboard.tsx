@@ -8,9 +8,10 @@ const Dashboard: FC = () => {
     const { username } = useContext(UserContext);
 
     return (
-        <>
+        <div>
             {username ? <></> : <Redirect to="/login" />}
-        </>
+            <div>Dashboard</div>
+        </div>
     );
 };
 
