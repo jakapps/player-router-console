@@ -11,7 +11,7 @@ const Dashboard: FC = () => {
     return (
         <div>
             {username ? <></> : <Redirect to="/login" />}
-            <div className="bg-gray-100 flex w-full">
+            <div className="bg-gray-100 flex w-full items-baseline">
                 <div>Dashboard</div>
                 <div className="flex-grow"></div>
                 <div aria-label="username">
