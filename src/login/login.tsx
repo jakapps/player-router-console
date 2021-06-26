@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { Button } from "../button";
 import { ILoginSubmitData } from "../interfaces";
 
 interface InputFieldProps {
@@ -24,21 +25,6 @@ const InputField: FC<InputFieldProps> = ({ name, title, placeholder, onChange, e
                 aria-label={`${name}-input`}
             />
         </>
-    )
-};
-
-interface ButtonProps {
-    click: () => void
-};
-
-const Button: FC<ButtonProps> = ({ click, children }) => {
-
-    return (
-        <button
-            className="w-full bg-blue-600 text-blue-100 p-2 rounded"
-            onClick={() => click()}>
-            {children}
-        </button>
     )
 };
 
