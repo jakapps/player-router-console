@@ -7,9 +7,14 @@ type User = {
 
 const UserContext = createContext<User>({ username: '', setUsername: (u: string) => {}});
 
-const UserProvider: FC = ({ children }) => {
+interface UserProviderProps {
+    children?: any,
+    initialUsername?: string
+};
 
-    const [username, setUsername] = useState('');
+const UserProvider: FC<UserProviderProps> = ({ children, initialUsername }) => {
+
+    const [username, setUsername] = useState(initialUsername || '');
 
     return (
         <UserContext.Provider value={{ username, setUsername }}>
