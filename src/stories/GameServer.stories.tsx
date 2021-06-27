@@ -18,5 +18,6 @@ const Template: ComponentStory<typeof GameServer> = (args) => {
 
 export const Primary = Template.bind({});
 Primary.args = {
-    playerCount: 0
+    playerCount: 0,
+    id: "serverid-8756rfdgu9whed87gd"
 };
