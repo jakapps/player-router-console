@@ -6,7 +6,13 @@ import { GameServer } from './game-server';
 describe('GameServer', () => {
 
     beforeEach(() => {
-        render(<GameServer playerCount="5" id="testId" />);
+        render(
+            <GameServer
+                playerCapacity="100"
+                playerCount="5"
+                id="testId"
+            />
+        );
     });
 
     test('renders id', () => {
@@ -17,6 +23,11 @@ describe('GameServer', () => {
     test('renders player count', () => {
         let playerCountText = screen.getByText("5");
         expect(playerCountText).toBeInTheDocument();
+    });
+
+    test('renders player capacity', () => {
+        let playerCapacityText = screen.getByText("100");
+        expect(playerCapacityText).toBeInTheDocument();
     });
 
     test('renders labels', () => {
