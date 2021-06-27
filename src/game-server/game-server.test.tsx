@@ -8,6 +8,7 @@ describe('GameServer', () => {
     beforeEach(() => {
         render(
             <GameServer
+                labels={{ testLabel: "testLabelValue", testLabel2: "testLabelValue2"}}
                 playerCapacity="100"
                 playerCount="5"
                 id="testId"
@@ -32,5 +33,10 @@ describe('GameServer', () => {
 
     test('renders labels', () => {
 
+        let label = screen.getByText("testLabel2");
+        let labelText = screen.getByText("testLabelValue2");
+
+        expect(label).toBeInTheDocument();
+        expect(labelText).toBeInTheDocument();
     });
 });
