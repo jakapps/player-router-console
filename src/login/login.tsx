@@ -1,16 +1,12 @@
 import { FC, useState } from "react";
 import { Button } from "../button";
-import { ILoginSubmitData } from "../interfaces";
+import { Box } from "../box";
+import {
+    IInputFieldProps,
+    ILoginProps
+} from "../interfaces";
 
-interface InputFieldProps {
-    name: string,
-    title: string,
-    error?: string,
-    placeholder?: string
-    onChange: (value: string) => void
-};
-
-const InputField: FC<InputFieldProps> = ({ name, title, placeholder, onChange, error }) => {
+const InputField: FC<IInputFieldProps> = ({ name, title, placeholder, onChange, error }) => {
 
     let titleClasses = error ? 'text-red-600' : '';
     let inputClasses = error ? 'border-red-600': 'border-blue-500';
@@ -28,15 +24,7 @@ const InputField: FC<InputFieldProps> = ({ name, title, placeholder, onChange, e
     )
 };
 
-interface LoginProps {
-    loading?: boolean,
-    errorUrl?: string,
-    errorUsername?: string,
-    errorPassword?: string,
-    onSubmit: (args: ILoginSubmitData) => void
-};
-
-const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPassword, loading }) => {
+const Login: FC<ILoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPassword, loading }) => {
 
     const [url, setUrl] = useState('');
     const [urlError, setUrlError] = useState(errorUrl);
@@ -63,41 +51,39 @@ const Login: FC<LoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswor
     };
 
     return (
-        <div className={`bg-gray-100 p-4 border-2 border-blue-500 rounded shadow-xl ${loading ? 'spinning' : 'expanding'}`}>
-            <div className={`${loading ? 'collapsed' : ''}`}>
-                <div className="pb-4">
+        <Box collapsed={loading}>
+            <div className="pb-4">
+                <InputField
+                    name="url"
+                    error={urlError}
+                    title="Player Router Server"
+                    placeholder="Eg wss://server.playerrouter.com"
+                    onChange={(value: string) => {setUrl(value); setUrlError('')}}
+                />
+            </div>
+            <div className="flex w-full">
+                <div className="w-1/2 pr-2">
                     <InputField
-                        name="url"
-                        error={urlError}
-                        title="Player Router Server"
-                        placeholder="Eg wss://server.playerrouter.com"
-                        onChange={(value: string) => {setUrl(value); setUrlError('')}}
+                        name="username"
+                        error={usernameError}
+                        title="Username"
+                        placeholder="Eg admin"
+                        onChange={(value: string) => {setUsername(value); setUsernameError('')}}
                     />
                 </div>
-                <div className="flex w-full">
-                    <div className="w-1/2 pr-2">
-                        <InputField
-                            name="username"
-                            error={usernameError}
-                            title="Username"
-                            placeholder="Eg admin"
-                            onChange={(value: string) => {setUsername(value); setUsernameError('')}}
-                        />
-                    </div>
-                    <div className="w-1/2 pl-2">
-                        <InputField
-                            name="password"
-                            error={passwordError}
-                            title="Password"
-                            onChange={(value: string) => {setPassword(value); setPasswordError('')}}
-                        />
-                    </div>
-                </div>
-                <div className="pt-4">
-                    <Button click={() => submit()}>Login</Button>
+                <div className="w-1/2 pl-2">
+                    <InputField
+                        name="password"
+                        error={passwordError}
+                        title="Password"
+                        onChange={(value: string) => {setPassword(value); setPasswordError('')}}
+                    />
                 </div>
             </div>
-        </div>
+            <div className="pt-4">
+                <Button click={() => submit()}>Login</Button>
+            </div>
+        </Box>
     );
 };
 

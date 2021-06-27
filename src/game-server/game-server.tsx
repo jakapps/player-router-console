@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Box } from "../box";
 
 interface GameServerProps {
     playerCount: number
@@ -7,9 +8,9 @@ interface GameServerProps {
 const GameServer:FC<GameServerProps> = ({ playerCount }) => {
 
     return (
-        <div className="bg-gray-200">
+        <Box collapsed={false}>
             {playerCount}
-        </div>
+        </Box>
     );
 };
 
