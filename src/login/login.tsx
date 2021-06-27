@@ -51,7 +51,7 @@ const Login: FC<ILoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswo
     };
 
     return (
-        <Box collapsed={loading}>
+        <Box collapsed={loading} title="Login">
             <div className="pb-4">
                 <InputField
                     name="url"

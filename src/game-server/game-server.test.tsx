@@ -5,8 +5,16 @@ import { GameServer } from './game-server';
 
 describe('GameServer', () => {
 
+    beforeEach(() => {
+        render(<GameServer playerCount="5" id="testId" />);
+    });
+
+    test('renders id', () => {
+        let id = screen.getByText("testId");
+        expect(id).toBeInTheDocument();
+    });
+
     test('renders player count', () => {
-        render(<GameServer playerCount="5" />);
         let playerCountText = screen.getByText("5");
         expect(playerCountText).toBeInTheDocument();
     });
