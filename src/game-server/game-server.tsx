@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box } from "../box";
+import { Box, InfoBox } from "../box";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
@@ -15,15 +15,12 @@ const GameServer:FC<GameServerProps> = ({ id, playerCount, playerCapacity }) => 
     return (
         <Box collapsed={false} title={id}>
             <div className="inline-block">
-                <div className="bg-white border-2 border-blue-500 rounded flex">
-                    <div className="bg-blue-500 p-2 text-gray-100">
-                        <FontAwesomeIcon icon={faUsers} />
-                    </div>
-                    <div className="p-2 flex">
+                <InfoBox label={<FontAwesomeIcon icon={faUsers} />}>
+                    <div className="flex">
                         <div>{playerCount}</div> /
                         <div>{playerCapacity}</div>
                     </div>
-                </div>
+                </InfoBox>
             </div>
         </Box>
     );

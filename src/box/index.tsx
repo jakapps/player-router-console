@@ -1,3 +1,4 @@
 import { Box } from "./box";
+import { InfoBox } from "./info-box";
 
-export { Box };
+export { Box, InfoBox };
