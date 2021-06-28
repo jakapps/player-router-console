@@ -2,11 +2,13 @@ import { FC, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import { UserContext } from "../contexts/user";
+import { ServerWebsocketContext } from "../contexts/server-websocket";
 import { Button } from "../button";
 
 const Dashboard: FC = () => {
 
     const { username, setUsername } = useContext(UserContext);
+    const { gameServers } = useContext(ServerWebsocketContext);
 
     return (
         <div>

@@ -1,8 +1,8 @@
 
 interface ILoginSubmitData {
     url: string,
-    username?: string,
-    password?: string
+    username: string,
+    password: string
 };
 
 interface IInputFieldProps {

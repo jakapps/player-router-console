@@ -6,6 +6,7 @@ import { SplashScreen } from "./splash-screen";
 import { Dashboard } from "./dashboard";
 
 import { UserProvider } from "./contexts/user";
+import { ServerWebsocketProvider } from "./contexts/server-websocket";
 
 const App: FC = () => {
 
@@ -13,14 +14,16 @@ const App: FC = () => {
         <BrowserRouter>
             <div className="app h-full">
                 <UserProvider>
-                    <Switch>
-                        <Route path="/login">
-                            <SplashScreen />
-                        </Route>
-                        <Route path="/">
-                            <Dashboard />
-                        </Route>
-                    </Switch>
+                    <ServerWebsocketProvider>
+                        <Switch>
+                            <Route path="/login">
+                                <SplashScreen />
+                            </Route>
+                            <Route path="/">
+                                <Dashboard />
+                            </Route>
+                        </Switch>
+                    </ServerWebsocketProvider>
                 </UserProvider>
             </div>
         </BrowserRouter>

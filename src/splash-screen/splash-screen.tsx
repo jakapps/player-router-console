@@ -3,13 +3,15 @@ import { Redirect } from "react-router-dom";
 
 import { Login } from "../login";
 import { UserContext } from "../contexts/user";
+import { ServerWebsocketContext } from "../contexts/server-websocket";
 
 import { ILoginSubmitData } from '../interfaces';
 
 const SplashScreen: FC = () => {
 
     const [loading, setLoading] = useState(false);
-    const { username, setUsername } = useContext(UserContext);
+    const { username } = useContext(UserContext);
+    const { attemptConnect } = useContext(ServerWebsocketContext);
 
     const submit = ({ url, username, password }: ILoginSubmitData) => {
 
@@ -20,7 +22,7 @@ const SplashScreen: FC = () => {
         setLoading(true);
 
         if(username) {
-            setUsername(username);
+            attemptConnect(url, username, password);
         };
 
         setLoading(false);
