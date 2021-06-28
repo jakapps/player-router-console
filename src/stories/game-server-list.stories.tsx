@@ -8,7 +8,7 @@ import { GameServerList } from '../game-server';
 export default {
   title: 'Example/GameServerList',
   component: GameServerList
-} as ComponentMeta<typeof GameServer>;
+} as ComponentMeta<typeof GameServerList>;
 
 const Template: ComponentStory<typeof GameServerList> = (args) => {
     return (
