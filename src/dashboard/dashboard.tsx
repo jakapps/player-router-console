@@ -3,16 +3,13 @@ import { Redirect } from "react-router-dom";
 
 import { UserContext } from "../contexts/user";
 import { GameServerContext } from "../contexts/game-server";
-import { GameServer } from "../game-server";
+import { GameServerList } from "../game-server";
 import { Button } from "../button";
 
 const Dashboard: FC = () => {
 
     const { username, setUsername } = useContext(UserContext);
     const { gameServers } = useContext(GameServerContext);
-
-    const displayGameServers = Object.entries(gameServers)
-    .map(([key, value]) => <GameServer key={key} {...value} />);
 
     return (
         <div>
@@ -30,7 +27,7 @@ const Dashboard: FC = () => {
                 </div>
             </div>
             <div className="p-4">
-                {displayGameServers}
+                <GameServerList gameServers={gameServers} />
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { IGameServerProps } from "../interfaces";
+import { IGameServers } from "../interfaces";
 
 import {
     FC,
@@ -6,20 +6,16 @@ import {
     useState
 } from 'react';
 
-type GameServers = {
-    [serverId: string]: IGameServerProps
-};
-
 interface GameServerContextProps {
-    gameServers: GameServers,
-    setGameServers: (gameServers: GameServers) => void
+    gameServers: IGameServers,
+    setGameServers: (gameServers: IGameServers) => void
 };
 
-const GameServerContext = createContext<GameServerContextProps>({ gameServers: {}, setGameServers: (gameServers: GameServers) => {}});
+const GameServerContext = createContext<GameServerContextProps>({ gameServers: {}, setGameServers: (gameServers: IGameServers) => {}});
 
 interface GameServerProviderProps {
     children?: any,
-    initialGameServers?: GameServers
+    initialGameServers?: IGameServers
 }
 
 const GameServerProvider: FC<GameServerProviderProps> = ({ children, initialGameServers }) => {

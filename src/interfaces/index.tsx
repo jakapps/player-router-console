@@ -28,9 +28,14 @@ interface IGameServerProps {
     labels: { [label: string]: string }
 };
 
+interface IGameServers {
+    [serverId: string]: IGameServerProps
+};
+
 export type {
     ILoginSubmitData,
     IInputFieldProps,
     ILoginProps,
-    IGameServerProps
+    IGameServerProps,
+    IGameServers
 };
