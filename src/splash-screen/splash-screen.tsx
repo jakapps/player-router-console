@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 import { Login } from "../login";
 import { UserContext } from "../contexts/user";
-import { ServerWebsocketContext } from "../contexts/server-websocket";
+import { WebsocketContext } from "../contexts/websocket";
 
 import { ILoginSubmitData } from '../interfaces';
 
@@ -11,7 +11,7 @@ const SplashScreen: FC = () => {
 
     const [loading, setLoading] = useState(false);
     const { username } = useContext(UserContext);
-    const { attemptConnect } = useContext(ServerWebsocketContext);
+    const { attemptConnect } = useContext(WebsocketContext);
 
     const submit = ({ url, username, password }: ILoginSubmitData) => {
 

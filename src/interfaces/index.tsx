@@ -21,8 +21,16 @@ interface ILoginProps {
     onSubmit: (args: ILoginSubmitData) => void
 };
 
+interface IGameServerProps {
+    id: string,
+    playerCount: number,
+    playerCapacity: number,
+    labels: { [label: string]: string }
+};
+
 export type {
     ILoginSubmitData,
     IInputFieldProps,
-    ILoginProps
+    ILoginProps,
+    IGameServerProps
 };

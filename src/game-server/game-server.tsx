@@ -4,14 +4,9 @@ import { Box, InfoBox } from "../box";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
-interface GameServerProps {
-    id: string,
-    playerCount: number,
-    playerCapacity: number,
-    labels: { [label: string]: string }
-};
+import { IGameServerProps } from "../interfaces";
 
-const GameServer:FC<GameServerProps> = ({ id, playerCount, playerCapacity, labels }) => {
+const GameServer:FC<IGameServerProps> = ({ id, playerCount, playerCapacity, labels }) => {
 
     let displayLabels;
 

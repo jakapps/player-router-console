@@ -2,13 +2,17 @@ import { FC, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import { UserContext } from "../contexts/user";
-import { ServerWebsocketContext } from "../contexts/server-websocket";
+import { GameServerContext } from "../contexts/game-server";
+import { GameServer } from "../game-server";
 import { Button } from "../button";
 
 const Dashboard: FC = () => {
 
     const { username, setUsername } = useContext(UserContext);
-    const { gameServers } = useContext(ServerWebsocketContext);
+    const { gameServers } = useContext(GameServerContext);
+
+    const displayGameServers = Object.entries(gameServers)
+    .map(([key, value]) => <GameServer key={key} {...value} />);
 
     return (
         <div>
@@ -24,6 +28,9 @@ const Dashboard: FC = () => {
                         Logout
                     </Button>
                 </div>
+            </div>
+            <div className="p-4">
+                {displayGameServers}
             </div>
         </div>
     );
