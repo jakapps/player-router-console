@@ -5,11 +5,21 @@ import './tailwind.bak.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { UserProvider } from "./contexts/user";
+import { GameServerProvider } from "./contexts/game-server";
+import { WebsocketProvider } from "./contexts/websocket";
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <UserProvider>
+            <GameServerProvider>
+                <WebsocketProvider>
+                    <App />
+                </WebsocketProvider>
+            </GameServerProvider>
+        </UserProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

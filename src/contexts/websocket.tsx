@@ -19,12 +19,21 @@ const WebsocketContext = createContext<WebsocketContextProps>({
 
 const WebsocketProvider: FC = ({ children }) => {
 
-    const ws = useRef(null);
+    const ws: any = useRef(null);
     const { setUsername } = useContext(UserContext);
     const { setGameServers } = useContext(GameServerContext);
 
     const attemptConnect = useCallback((url: string, username: string, password: string) => {
-        setUsername(username);
+
+        ws.current = new WebSocket(url);
+        /*
+        ws.current.addEventListener('error', (error: any) => {
+            console.log(error);
+        });
+        */
+
+
+
 
         let gameServers: any = {
 
@@ -36,6 +45,7 @@ const WebsocketProvider: FC = ({ children }) => {
             }
         };
 
+        setUsername(username);
         setGameServers(gameServers);
 
     }, [setUsername, setGameServers]);

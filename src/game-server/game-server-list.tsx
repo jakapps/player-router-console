@@ -13,7 +13,7 @@ const GameServerList: FC<GameServerListProps> = ({ gameServers }) => {
     .map(([key, value]) => {
 
         return (
-            <div className="w-full p-2 md:w-1/2 lg:w-1/3 xl:w-auto">
+            <div key={key} className="w-full p-2 md:w-1/2 lg:w-1/3 xl:w-auto">
                 <GameServer key={key} {...value} />
             </div>
         );
