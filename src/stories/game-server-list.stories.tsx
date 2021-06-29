@@ -28,8 +28,20 @@ Primary.args = {
         socketId2: {
             labels: { "label": "aDifferentLabelValue" },
             playerCapacity: 100,
-            playerCount: 0,
+            playerCount: 4,
             id: "serverid-87564309tijeoinvn"
+        },
+        socketId3: {
+            labels: { "label": "aDifferentLabelValue", "stage": "beta" },
+            playerCapacity: 100,
+            playerCount: 81,
+            id: "serverid-sfbwfwvbv"
+        },
+        socketId4: {
+            labels: { "label": "aDifferentLabelValue", "stage": "beta" },
+            playerCapacity: 100,
+            playerCount: 100,
+            id: "serverid-dib92hfuwjsfhuwfjwnef"
         }
     }
 };

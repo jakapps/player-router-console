@@ -17,12 +17,10 @@ const Box: FC<BoxProps> = ({ children, collapsed, title }) => {
     );
 
     return (
-        <div className={`bg-gray-100 border-2 border-blue-500 rounded shadow-xl ${collapsed? 'spinning' : 'expanding'}`}>
+        <div className={`bg-gray-100 border-2 border-blue-500 rounded shadow-md ${collapsed? 'spinning' : 'expanding'}`}>
             <div className={`${collapsed ? 'collapsed' : ''}`}>
                 {title && displayTitle}
-                <div className="p-4">
-                    {children}
-                </div>
+                {children}
             </div>
         </div>
     );

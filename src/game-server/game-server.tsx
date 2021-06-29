@@ -16,7 +16,7 @@ const GameServer:FC<IGameServerProps> = ({ id, playerCount, playerCapacity, labe
         .map(([label, value]) => {
 
             return (
-                <div key={label} className="inline-block pl-4">
+                <div key={label} className="p-2">
                     <InfoBox label={label}>{value}</InfoBox>
                 </div>
             );
@@ -25,8 +25,8 @@ const GameServer:FC<IGameServerProps> = ({ id, playerCount, playerCapacity, labe
 
     return (
         <Box collapsed={false} title={id}>
-            <div className="flex no-wrap">
-                <div className="inline-block">
+            <div className="flex flex-wrap w-full p-2">
+                <div className="p-2">
                     <InfoBox label={<FontAwesomeIcon icon={faUsers} />}>
                         <div className="flex">
                             <div>{playerCount}</div> /

@@ -26,7 +26,7 @@ const Dashboard: FC = () => {
                     </Button>
                 </div>
             </div>
-            <div className="p-4">
+            <div className="p-2">
                 <GameServerList gameServers={gameServers} />
             </div>
         </div>
