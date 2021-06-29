@@ -24,30 +24,24 @@ const InputField: FC<IInputFieldProps> = ({ name, title, placeholder, onChange, 
     )
 };
 
-const Login: FC<ILoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPassword, loading }) => {
+const Login: FC<ILoginProps> = ({
+    onSubmit,
+    urlError,
+    usernameError,
+    passwordError,
+    loading }) => {
 
     const [url, setUrl] = useState('');
-    const [urlError, setUrlError] = useState(errorUrl);
-    const [usernameError, setUsernameError] = useState(errorUsername);
-    const [passwordError, setPasswordError] = useState(errorPassword);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const submit = () => {
-
-        if(!url) {
-            setUrlError('Enter a valid url for Player Router server');
-            return;
-        }
-
-        let vals: any = { url };
-
-        if(username && password) {
-            vals.username = username;
-            vals.password = password;
-        }
-
-        onSubmit(vals);
+        
+        onSubmit({
+            url,
+            username,
+            password
+        });
     };
 
     return (
@@ -59,7 +53,7 @@ const Login: FC<ILoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswo
                         error={urlError}
                         title="Player Router Server"
                         placeholder="Eg wss://server.playerrouter.com"
-                        onChange={(value: string) => {setUrl(value); setUrlError('')}}
+                        onChange={(value: string) => setUrl(value)}
                     />
                 </div>
                 <div className="flex w-full">
@@ -69,7 +63,7 @@ const Login: FC<ILoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswo
                             error={usernameError}
                             title="Username"
                             placeholder="Eg admin"
-                            onChange={(value: string) => {setUsername(value); setUsernameError('')}}
+                            onChange={(value: string) => setUsername(value)}
                         />
                     </div>
                     <div className="w-1/2 pl-2">
@@ -77,7 +71,7 @@ const Login: FC<ILoginProps> = ({ onSubmit, errorUrl, errorUsername, errorPasswo
                             name="password"
                             error={passwordError}
                             title="Password"
-                            onChange={(value: string) => {setPassword(value); setPasswordError('')}}
+                            onChange={(value: string) => setPassword(value)}
                         />
                     </div>
                 </div>

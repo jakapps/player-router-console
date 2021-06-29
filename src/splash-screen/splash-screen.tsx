@@ -9,9 +9,13 @@ import { ILoginSubmitData } from '../interfaces';
 
 const SplashScreen: FC = () => {
 
-    const [loading, setLoading] = useState(false);
     const { username } = useContext(UserContext);
     const { attemptConnect } = useContext(WebsocketContext);
+
+    const [loading, setLoading] = useState(false);
+    const [urlError, setUrlError] = useState('');
+    const [usernameError, setUsernameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     const submit = ({ url, username, password }: ILoginSubmitData) => {
 
@@ -19,10 +23,31 @@ const SplashScreen: FC = () => {
             return;
         }
 
+        setUrlError('');
+        setUsernameError('');
+        setPasswordError('');
+
+        if(!url) {
+            setUrlError("Enter a URL for Player Router server");
+            return;
+        }
+
+        if(!username) {
+            setUsernameError("Enter a valid username");
+        }
+
+        if(!password) {
+            setPasswordError("Enter a password");
+        }
+
         setLoading(true);
 
         if(username) {
-            attemptConnect(url, username, password);
+            let success = attemptConnect(url, username, password);
+
+            if(!success) {
+                setUrlError('Invalid URL');
+            }
         };
 
         setLoading(false);
@@ -38,6 +63,9 @@ const SplashScreen: FC = () => {
                 <div className="flex-grow"></div>
                 <Login
                     loading={loading}
+                    urlError={urlError}
+                    usernameError={usernameError}
+                    passwordError={passwordError}
                     onSubmit={(data) => submit(data)}
                 />
                 <div className="flex-grow"></div>

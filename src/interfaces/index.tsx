@@ -15,9 +15,9 @@ interface IInputFieldProps {
 
 interface ILoginProps {
     loading: boolean,
-    errorUrl?: string,
-    errorUsername?: string,
-    errorPassword?: string,
+    urlError: string,
+    usernameError: string,
+    passwordError: string,
     onSubmit: (args: ILoginSubmitData) => void
 };
 

@@ -10,11 +10,11 @@ import {
 } from 'react';
 
 interface WebsocketContextProps {
-    attemptConnect: (url: string, username: string, password: string) => void
+    attemptConnect: (url: string, username: string, password: string) => boolean
 };
 
 const WebsocketContext = createContext<WebsocketContextProps>({
-    attemptConnect: (url: string, username: string, password: string) => {}
+    attemptConnect: (url: string, username: string, password: string) => false
 });
 
 const WebsocketProvider: FC = ({ children }) => {
@@ -25,12 +25,15 @@ const WebsocketProvider: FC = ({ children }) => {
 
     const attemptConnect = useCallback((url: string, username: string, password: string) => {
 
-        ws.current = new WebSocket(url);
-        /*
-        ws.current.addEventListener('error', (error: any) => {
-            console.log(error);
-        });
-        */
+        try {
+            ws.current = new WebSocket(url);
+            ws.current.onerror('error', (error: any) => {
+                console.log(error);
+            });
+
+        } catch (error) {
+            return false;
+        }
 
 
 
@@ -47,6 +50,8 @@ const WebsocketProvider: FC = ({ children }) => {
 
         setUsername(username);
         setGameServers(gameServers);
+
+        return true;
 
     }, [setUsername, setGameServers]);
 
