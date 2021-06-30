@@ -20,7 +20,10 @@ const Template: ComponentStory<typeof Login> = (args) => {
 
 export const Primary = Template.bind({});
 Primary.args = {
-    loading: false
+    loading: false,
+    urlError: '',
+    usernameError: '',
+    passwordError: ''
 };
 
 export const Loading = Template.bind({});

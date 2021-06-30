@@ -17,7 +17,7 @@ const SplashScreen: FC = () => {
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    const submit = ({ url, username, password }: ILoginSubmitData) => {
+    const submit = async ({ url, username, password }: ILoginSubmitData) => {
 
         if(loading) {
             return;
@@ -34,21 +34,29 @@ const SplashScreen: FC = () => {
 
         if(!username) {
             setUsernameError("Enter a valid username");
+            return;
         }
 
         if(!password) {
             setPasswordError("Enter a password");
+            return;
         }
 
         setLoading(true);
 
-        if(username) {
-            let success = attemptConnect(url, username, password);
+        let errors = await attemptConnect(url, username, password);
 
-            if(!success) {
-                setUrlError('Invalid URL');
-            }
-        };
+        if(errors.url) {
+            setUrlError(errors.url);
+        }
+
+        if(errors.username) {
+            setUsernameError(errors.username);
+        }
+
+        if(errors.password) {
+            setPasswordError(errors.password);
+        }
 
         setLoading(false);
     }

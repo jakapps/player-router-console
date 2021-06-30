@@ -10,11 +10,11 @@ import {
 } from 'react';
 
 interface WebsocketContextProps {
-    attemptConnect: (url: string, username: string, password: string) => boolean
+    attemptConnect: (url: string, username: string, password: string) => Promise<{ [type: string]: string }>
 };
 
 const WebsocketContext = createContext<WebsocketContextProps>({
-    attemptConnect: (url: string, username: string, password: string) => false
+    attemptConnect: (url: string, username: string, password: string) => Promise.resolve({})
 });
 
 const WebsocketProvider: FC = ({ children }) => {
@@ -25,34 +25,37 @@ const WebsocketProvider: FC = ({ children }) => {
 
     const attemptConnect = useCallback((url: string, username: string, password: string) => {
 
-        try {
-            ws.current = new WebSocket(url);
-            ws.current.onerror('error', (error: any) => {
-                console.log(error);
-            });
+        return new Promise<{ [type: string]: string}>((resolve) => {
 
-        } catch (error) {
-            return false;
-        }
+            try {
+                ws.current = new WebSocket(url);
 
+                ws.current.onerror = (error: any) => {
+                    resolve({ url: "Failed to connect to server"})
+                };
 
+                ws.current.onopen = () => {
 
+                    let gameServers: any = {
 
-        let gameServers: any = {
+                        "testSocketId": {
+                            id: "testServer",
+                            playerCount: 7,
+                            playerCapacity: 100,
+                            labels: {}
+                        }
+                    };
 
-            "testSocketId": {
-                id: "testServer",
-                playerCount: 7,
-                playerCapacity: 100,
-                labels: {}
+                    setUsername(username);
+                    setGameServers(gameServers);
+
+                    resolve({});
+                };
+
+            } catch (error) {
+                resolve({ url: "Invalid URL"})
             }
-        };
-
-        setUsername(username);
-        setGameServers(gameServers);
-
-        return true;
-
+        });
     }, [setUsername, setGameServers]);
 
     return (

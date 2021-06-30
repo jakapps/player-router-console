@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from "react-router-dom"
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import WS from "jest-websocket-mock";
 
 import SplashScreen from "./splash-screen";
@@ -11,11 +11,15 @@ describe('SplashScreen', () => {
 
     beforeEach(() => {
         server = new WS("ws://localhost:1234", { jsonProtocol: true });
-        render(
-            <WebsocketProvider>
-                <SplashScreen />
-            </WebsocketProvider>
-        );
+
+        act(() => {
+
+            render(
+                <WebsocketProvider>
+                    <SplashScreen />
+                </WebsocketProvider>
+            );
+        });
     });
 
     afterEach(() => {
@@ -23,40 +27,58 @@ describe('SplashScreen', () => {
         WS.clean();
     });
 
-    test('login routine attempts to connect to websocket server', async () => {
-        let urlElement = screen.getByLabelText('url-input');
-        fireEvent.change(urlElement, { target: { value: 'ws://localhost:1234' }});
+    describe('login routine', () => {
 
-        let usernameElement = screen.getByLabelText('username-input');
-        fireEvent.change(usernameElement, { target: { value: 'admin' }});
+        beforeEach(() => {
+            let usernameElement = screen.getByLabelText('username-input');
+            fireEvent.change(usernameElement, { target: { value: 'admin' }});
 
-        let passwordElement = screen.getByLabelText('password-input');
-        fireEvent.change(passwordElement, { target: { value: 'testPassword' }});
+            let passwordElement = screen.getByLabelText('password-input');
+            fireEvent.change(passwordElement, { target: { value: 'testPassword' }});
+        });
 
-        let button = screen.getByRole('button');
-        expect(button).toBeInTheDocument();
-        fireEvent.click(button);
+        test('attempts to connect to websocket server', async () => {
+            let urlElement = screen.getByLabelText('url-input');
+            fireEvent.change(urlElement, { target: { value: 'ws://localhost:1234' }});
 
-        await server.connected;
-    });
+            let button = screen.getByRole('button');
+            expect(button).toBeInTheDocument();
+            fireEvent.click(button);
 
-    test('login routine displays error message for invalid urls', () => {
+            await server.connected;
+        });
 
-        let urlElement = screen.getByLabelText('url-input');
-        fireEvent.change(urlElement, { target: { value: 'anInvalidUrl' }});
+        test('displays error message for invalid urls', async () => {
 
-        let usernameElement = screen.getByLabelText('username-input');
-        fireEvent.change(usernameElement, { target: { value: 'admin' }});
+            let urlElement = screen.getByLabelText('url-input');
+            fireEvent.change(urlElement, { target: { value: 'anInvalidUrl' }});
 
-        let passwordElement = screen.getByLabelText('password-input');
-        fireEvent.change(passwordElement, { target: { value: 'testPassword' }});
+            let button = screen.getByRole('button');
+            expect(button).toBeInTheDocument();
 
-        let button = screen.getByRole('button');
-        expect(button).toBeInTheDocument();
-        fireEvent.click(button);
+            act(() => {
+                fireEvent.click(button);
+            });
 
-        let errorText = screen.getByText('Invalid URL');
-        expect(errorText).toBeInTheDocument();
+            let errorText = await screen.findByText('Invalid URL');
+            expect(errorText).toBeInTheDocument();
+        });
+
+        test('displays error message when fails to connect to server', async () => {
+
+            let urlElement = screen.getByLabelText('url-input');
+            fireEvent.change(urlElement, { target: { value: 'ws://wrongurl.localhost:1235' }});
+
+            let button = screen.getByRole('button');
+            expect(button).toBeInTheDocument();
+
+            act(() => {
+                fireEvent.click(button);
+            });
+
+            let errorText = await screen.findByText('Failed to connect to server');
+            expect(errorText).toBeInTheDocument();
+        });
     });
 
     describe('when no fields are filled in', () => {
@@ -78,7 +100,7 @@ describe('SplashScreen', () => {
 
             let urlElement = screen.getByLabelText('url-input');
             fireEvent.change(urlElement, { target: { value: 'ws://example.url.com' }});
-            
+
             fireEvent.click(button);
 
             error = screen.getByText("Player Router Server");
