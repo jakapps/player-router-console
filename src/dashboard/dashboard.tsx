@@ -3,13 +3,15 @@ import { Redirect } from "react-router-dom";
 
 import { UserContext } from "../contexts/user";
 import { GameServerContext } from "../contexts/game-server";
+import { WebsocketContext } from "../contexts/websocket";
 import { GameServerList } from "../game-server";
 import { Button } from "../button";
 
 const Dashboard: FC = () => {
 
-    const { username, setUsername } = useContext(UserContext);
+    const { username } = useContext(UserContext);
     const { gameServers } = useContext(GameServerContext);
+    const { disconnect } = useContext(WebsocketContext);
 
     return (
         <div>
@@ -21,7 +23,7 @@ const Dashboard: FC = () => {
                     { username }
                 </div>
                 <div>
-                    <Button click={() => setUsername('')}>
+                    <Button click={() => disconnect()}>
                         Logout
                     </Button>
                 </div>

@@ -10,11 +10,13 @@ import {
 } from 'react';
 
 interface WebsocketContextProps {
-    attemptConnect: (url: string, username: string, password: string) => Promise<{ [type: string]: string }>
+    attemptConnect: (url: string, username: string, password: string) => Promise<{ [type: string]: string }>,
+    disconnect: () => void
 };
 
 const WebsocketContext = createContext<WebsocketContextProps>({
-    attemptConnect: (url: string, username: string, password: string) => Promise.resolve({})
+    attemptConnect: (url: string, username: string, password: string) => Promise.resolve({}),
+    disconnect: () => {}
 });
 
 const WebsocketProvider: FC = ({ children }) => {
@@ -45,7 +47,7 @@ const WebsocketProvider: FC = ({ children }) => {
     const onError = useCallback((error: any) => {
 
         if(connectedPromiseResolve.current) {
-            connectedPromiseResolve.current({ url: "Failed to connect to server"});
+            connectedPromiseResolve.current({ url: "Failed to connect to server" });
         } else {
             console.error("An error occurred with websocket:");
             console.log(error);
@@ -75,8 +77,14 @@ const WebsocketProvider: FC = ({ children }) => {
 
     }, [onMessage, onError]);
 
+    const disconnect = useCallback(() => {
+        ws.current.close();
+        setUsername('');
+        setGameServers({});
+    }, [setUsername, setGameServers]);
+
     return (
-        <WebsocketContext.Provider value={{ attemptConnect }}>
+        <WebsocketContext.Provider value={{ attemptConnect, disconnect }}>
             {children}
         </WebsocketContext.Provider>
     );
