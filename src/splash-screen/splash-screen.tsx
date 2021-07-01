@@ -1,4 +1,4 @@
-import { FC, useState, useContext } from "react";
+import { FC, useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
 import { Login } from "../login";
@@ -8,6 +8,7 @@ import { WebsocketContext } from "../contexts/websocket";
 import { ILoginSubmitData } from '../interfaces';
 
 const SplashScreen: FC = () => {
+    const mounted = useRef(true);
 
     const { username } = useContext(UserContext);
     const { attemptConnect } = useContext(WebsocketContext);
@@ -16,6 +17,14 @@ const SplashScreen: FC = () => {
     const [urlError, setUrlError] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+
+    // FIXME Idk about this... there must be a better way?
+    // (It prevents the submit callback from updating state to
+    // an unmounted component)
+    useEffect(() => {
+        mounted.current = true;
+        return () => { mounted.current = false };
+    });
 
     const submit = async ({ url, username, password }: ILoginSubmitData) => {
 
@@ -45,6 +54,10 @@ const SplashScreen: FC = () => {
         setLoading(true);
 
         let errors = await attemptConnect(url, username, password);
+
+        if(!mounted.current) {
+            return;
+        }
 
         if(errors.url) {
             setUrlError(errors.url);
