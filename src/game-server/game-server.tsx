@@ -2,11 +2,16 @@ import { FC } from "react";
 import { Box, InfoBox } from "../box";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faUsers, faLink } from "@fortawesome/free-solid-svg-icons";
 
 import { IGameServerProps } from "../interfaces";
 
-const GameServer:FC<IGameServerProps> = ({ id, playerCount, playerCapacity, labels }) => {
+const GameServer:FC<IGameServerProps> = ({
+    id,
+    playerCount,
+    playerCapacity,
+    labels,
+    gameServerURL }) => {
 
     let displayLabels;
 
@@ -32,6 +37,11 @@ const GameServer:FC<IGameServerProps> = ({ id, playerCount, playerCapacity, labe
                             <div>{playerCount}</div> /
                             <div>{playerCapacity}</div>
                         </div>
+                    </InfoBox>
+                </div>
+                <div className="p-2">
+                    <InfoBox label={<FontAwesomeIcon icon={faLink} />}>
+                        {gameServerURL}
                     </InfoBox>
                 </div>
                 {displayLabels}

@@ -21,5 +21,6 @@ Primary.args = {
     labels: { "label": "labelValue" },
     playerCapacity: 100,
     playerCount: 0,
-    id: "serverid-8756rfdgu9whed87gd"
+    id: "serverid-8756rfdgu9whed87gd",
+    gameServerURL: "gameserver.example.com:1234"
 };

@@ -11,6 +11,7 @@ describe('GameServer', () => {
                 labels={{ testLabel: "testLabelValue", testLabel2: "testLabelValue2"}}
                 playerCapacity="100"
                 playerCount="5"
+                gameServerURL="gameserver.example.com:1234"
                 id="testId"
             />
         );
@@ -38,5 +39,12 @@ describe('GameServer', () => {
 
         expect(label).toBeInTheDocument();
         expect(labelText).toBeInTheDocument();
+    });
+
+    test('renders gameServerURL', () => {
+
+        let gameServerURLElement = screen.getByText("gameserver.example.com:1234");
+
+        expect(gameServerURLElement).toBeInTheDocument();
     });
 });

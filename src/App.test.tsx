@@ -32,4 +32,8 @@ describe('App', () => {
         let textElement = screen.getByText('Dashboard');
         expect(textElement).toBeInTheDocument();
     });
+
+    test("connection to server lost message, when disconnected", () => {
+
+    });
 });

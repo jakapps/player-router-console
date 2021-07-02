@@ -25,7 +25,8 @@ interface IGameServerProps {
     id: string,
     playerCount: number,
     playerCapacity: number,
-    labels: { [label: string]: string }
+    labels: { [label: string]: string },
+    gameServerURL: string
 };
 
 interface IGameServers {
