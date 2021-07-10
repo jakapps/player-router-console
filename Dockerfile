@@ -4,6 +4,7 @@ COPY public public
 COPY src src
 COPY package.json package.json
 COPY tsconfig.json tsconfig.json
+COPY craco.config.js craco.config.js
 
 RUN npm install && npm run build
 
