@@ -29,7 +29,7 @@ describe('App', () => {
             </MemoryRouter>
         );
 
-        let textElement = screen.getByText('Dashboard');
+        let textElement = screen.getByText('Player Router Console');
         expect(textElement).toBeInTheDocument();
     });
 
