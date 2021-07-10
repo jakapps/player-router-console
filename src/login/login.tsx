@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, KeyboardEvent } from "react";
 import { Button } from "../button";
 import { Box } from "../box";
 import { InputField } from "./input-field";
@@ -25,9 +25,19 @@ const Login: FC<ILoginProps> = ({
         });
     };
 
+    const keyDownHandler = (event: KeyboardEvent) => {
+
+        if(event.key === "Enter") {
+            submit();
+        }
+    };
+
     return (
         <Box collapsed={loading} title="Login">
-            <div className="p-4">
+            <div
+                className="p-4"
+                aria-label="login-box"
+                onKeyUp={keyDownHandler}>
                 <div className="pb-4">
                     <InputField
                         name="url"
