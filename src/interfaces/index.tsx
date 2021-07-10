@@ -10,7 +10,8 @@ interface IInputFieldProps {
     title: string,
     error?: string,
     placeholder?: string
-    onChange: (value: string) => void
+    onChange: (value: string) => void,
+    type?: string
 };
 
 interface ILoginProps {

@@ -1,28 +1,9 @@
 import { FC, useState } from "react";
 import { Button } from "../button";
 import { Box } from "../box";
-import {
-    IInputFieldProps,
-    ILoginProps
-} from "../interfaces";
+import { InputField } from "./input-field";
 
-const InputField: FC<IInputFieldProps> = ({ name, title, placeholder, onChange, error }) => {
-
-    let titleClasses = error ? 'text-red-600' : '';
-    let inputClasses = error ? 'border-red-600': 'border-blue-500';
-
-    return (
-        <>
-            <div className={`pb-1 ${titleClasses}`}>{error || title}</div>
-            <input
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={placeholder}
-                className={`w-full p-2 rounded outline-none border-2 ${inputClasses}`}
-                aria-label={`${name}-input`}
-            />
-        </>
-    )
-};
+import { ILoginProps } from "../interfaces";
 
 const Login: FC<ILoginProps> = ({
     onSubmit,
@@ -36,7 +17,7 @@ const Login: FC<ILoginProps> = ({
     const [password, setPassword] = useState('');
 
     const submit = () => {
-        
+
         onSubmit({
             url,
             username,
@@ -71,6 +52,7 @@ const Login: FC<ILoginProps> = ({
                             name="password"
                             error={passwordError}
                             title="Password"
+                            type="password"
                             onChange={(value: string) => setPassword(value)}
                         />
                     </div>
