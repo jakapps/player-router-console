@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import "../tailwind.bak.css";
+import "../index.css";
 import { Button } from '../button';
 
 export default {

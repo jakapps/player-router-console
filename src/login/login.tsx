@@ -38,7 +38,7 @@ const Login: FC<ILoginProps> = ({
                 className="p-4"
                 aria-label="login-box"
                 onKeyUp={keyDownHandler}>
-                <div className="pb-4">
+                <div className="pb-8">
                     <InputField
                         name="url"
                         error={urlError}

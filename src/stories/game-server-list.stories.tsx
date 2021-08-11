@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import "../tailwind.bak.css";
 import "../App.css";
 import { GameServerList } from '../game-server';
 
